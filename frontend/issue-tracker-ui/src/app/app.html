@@ -1,0 +1,23 @@
+<div class="app-container">
+  <!-- Navigation Header -->
+  <mat-toolbar color="primary" class="app-toolbar">
+    <button mat-icon-button (click)="navigateHome()" class="home-button">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span class="app-title">{{title}}</span>
+    <div class="spacer"></div>
+    <button mat-icon-button routerLink="/issues/new" matTooltip="Create New Issue">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- Main Content -->
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>© 2025 Issue Tracker - Built with Angular & FastAPI</p>
+  </footer>
+</div>

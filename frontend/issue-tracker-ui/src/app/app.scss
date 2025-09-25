@@ -1,0 +1,76 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .app-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  .home-button {
+    margin-right: 8px;
+  }
+}
+
+.app-content {
+  flex: 1;
+  min-height: calc(100vh - 120px); // Subtract toolbar and footer height
+  background-color: #f5f5f5;
+  padding: 0;
+}
+
+.app-footer {
+  background-color: #fafafa;
+  border-top: 1px solid #e0e0e0;
+  padding: 16px;
+  text-align: center;
+  
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.875rem;
+  }
+}
+
+// Global Material Theme Overrides
+:root {
+  --primary-color: #1976d2;
+  --accent-color: #ff4081;
+  --warn-color: #f44336;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .app-toolbar {
+    .app-title {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Ensure Material icons display correctly
+mat-icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}

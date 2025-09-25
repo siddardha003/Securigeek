@@ -1,0 +1,125 @@
+.issue-form-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  gap: 20px;
+  
+  p {
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  
+  h1 {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
+}
+
+.form-card {
+  margin-bottom: 20px;
+}
+
+.issue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.half-width {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  
+  @media (max-width: 600px) {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+}
+
+.button-spinner {
+  margin-right: 8px;
+}
+
+// Form field styling
+mat-form-field {
+  .mat-mdc-form-field-subscript-wrapper {
+    margin-top: 8px;
+  }
+}
+
+// Error styling
+mat-error {
+  font-size: 0.875rem;
+  color: #f44336;
+}
+
+// Hint styling  
+mat-hint {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .issue-form-container {
+    padding: 10px;
+  }
+  
+  .header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// Button styling improvements
+button[mat-raised-button] {
+  min-width: 120px;
+  
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+  }
+}
+
+button[mat-button] {
+  min-width: 80px;
+}
