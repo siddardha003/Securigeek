@@ -187,4 +187,19 @@ export class IssueListComponent implements OnInit {
   formatDate(dateString: string): string {
     return new Date(dateString).toLocaleString();
   }
+
+  openAddAssigneeDialog(): void {
+    const name = prompt('Enter new assignee name:');
+    if (name && name.trim()) {
+      this.issueService.addAssignee(name.trim()).subscribe({
+        next: (res) => {
+          this.snackBar.open(`Assignee '${res.name}' added!`, 'Close', { duration: 2500 });
+          this.loadAssignees();
+        },
+        error: (err) => {
+          this.snackBar.open(err.message || 'Failed to add assignee', 'Close', { duration: 3000 });
+        }
+      });
+    }
+  }
 }

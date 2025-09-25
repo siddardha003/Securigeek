@@ -6,6 +6,13 @@
     </mat-card-header>
     
     <mat-card-content>
+      <!-- Add Assignee Button -->
+      <div class="add-assignee-row mb-2">
+        <button mat-stroked-button color="accent" (click)="openAddAssigneeDialog()">
+          <mat-icon>person_add</mat-icon>
+          Add Assignee
+        </button>
+      </div>
       <!-- Filters -->
       <form [formGroup]="filterForm" class="filters-section">
         <div class="filters-row">

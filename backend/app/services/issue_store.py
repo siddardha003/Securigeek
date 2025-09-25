@@ -5,13 +5,13 @@ from app.models import Issue, IssueCreate, IssueUpdate, IssueStatus, IssuePriori
 
 
 class IssueStore:
-    """Thread-safe in-memory storage for issues. Designed to be easily replaceable with database later."""
+    """Thread-safe in-memory storage for issues and assignees. Designed to be easily replaceable with database later."""
     
     def __init__(self):
         self._issues: Dict[int, Issue] = {}
         self._next_id = 1
         self._lock = threading.Lock()
-        
+        self._assignees: set[str] = set()
         # Add some sample data
         self._initialize_sample_data()
     
@@ -63,6 +63,9 @@ class IssueStore:
             )
             self._issues[self._next_id] = issue
             self._next_id += 1
+            # Add assignee to set if present
+            if issue.assignee:
+                self._assignees.add(issue.assignee)
             return issue
     
     def get_issue(self, issue_id: int) -> Optional[Issue]:
@@ -163,10 +166,20 @@ class IssueStore:
             return False
     
     def get_all_assignees(self) -> List[str]:
-        """Get list of all unique assignees"""
+        """Get list of all unique assignees (from issues and added assignees)"""
         with self._lock:
-            assignees = {issue.assignee for issue in self._issues.values() if issue.assignee}
+            # Combine assignees from issues and manually added
+            assignees = set(self._assignees)
+            assignees.update(issue.assignee for issue in self._issues.values() if issue.assignee)
             return sorted(list(assignees))
+
+    def add_assignee(self, name: str) -> bool:
+        """Add a new assignee name to the set"""
+        with self._lock:
+            if name and name not in self._assignees:
+                self._assignees.add(name)
+                return True
+            return False
 
 
 # Global instance

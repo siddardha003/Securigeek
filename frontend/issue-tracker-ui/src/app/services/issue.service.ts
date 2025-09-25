@@ -80,6 +80,14 @@ export class IssueService {
   }
 
   /**
+   * Add a new assignee
+   */
+  addAssignee(name: string): Observable<{success: boolean, name: string}> {
+    return this.http.post<{success: boolean, name: string}>(`${this.baseUrl}/assignees`, { name })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * Handle HTTP errors
    */
   private handleError(error: any): Observable<never> {

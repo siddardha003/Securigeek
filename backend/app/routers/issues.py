@@ -11,6 +11,7 @@ from app.models import (
     IssuePriority,
     HealthResponse
 )
+from fastapi import Body
 from app.services import issue_store
 
 router = APIRouter()
@@ -87,3 +88,14 @@ async def update_issue(issue_id: int, update_data: IssueUpdate):
 async def get_assignees():
     """Get list of all unique assignees (useful for frontend filters)"""
     return issue_store.get_all_assignees()
+
+
+# Add new assignee endpoint
+@router.post("/assignees", response_model=dict)
+async def add_assignee(name: str = Body(..., embed=True)):
+    """Add a new assignee name to the list"""
+    success = issue_store.add_assignee(name)
+    if success:
+        return {"success": True, "name": name}
+    else:
+        raise HTTPException(status_code=400, detail="Assignee already exists or invalid name")
